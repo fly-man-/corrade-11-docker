@@ -101,6 +101,12 @@ systemctl start corrade-container.service
 Now corrade will start up at system boot (provided that docker is running too, but this goes beyond this readme). If it fails, it'll automatically restart after five minutes. We have a delay here, because if for example the login fails or our configuration is borked, we do not want to spam the login servers. Adjust at your own risk.
 
 
+## Corrade Logfiles
+
+If you set up the service as aforementioned, it is very easy to follow the logs with `journalctl`:
+```
+journalctl -xfu corrade-container
+```
 
 
 
