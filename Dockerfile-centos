@@ -1,0 +1,21 @@
+
+# build file for Corrade docker container
+
+FROM centos:latest
+LABEL maintainer="ch@sysconfig.org.uk"
+EXPOSE 54377
+
+RUN yum -y update
+RUN yum -y install wget dotnet unzip
+RUN yum -y clean all
+
+WORKDIR /corrade
+RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip
+ADD Nucleus.xml ./
+ADD Configuration.xml.template ./
+ADD start-corrade.sh ./
+RUN unzip LATEST.zip
+
+
+ENTRYPOINT ["/corrade/start-corrade.sh"]
+CMD ["/corrade/start-corrade.sh"]

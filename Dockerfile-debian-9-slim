@@ -1,0 +1,34 @@
+
+# build file for Corrade docker container
+
+FROM debian:stretch-slim
+LABEL maintainer="ch@sysconfig.org.uk"
+EXPOSE 54377
+
+
+
+WORKDIR /corrade
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
+
+# pre-requisites (dotnet) need to come from Microsoft on Debian
+
+RUN apt-get install -y wget gpg apt-transport-https unzip
+RUN wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+RUN mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+RUN wget https://packages.microsoft.com/config/debian/9/prod.list
+RUN mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+RUN apt-get update -y
+RUN apt-get install -y dotnet-runtime-5.0
+
+
+RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip
+ADD Nucleus.xml ./
+ADD Configuration.xml.template ./
+ADD start-corrade.sh ./
+RUN unzip LATEST.zip
+
+
+ENTRYPOINT ["/corrade/start-corrade.sh"]
+CMD ["/corrade/start-corrade.sh"]
