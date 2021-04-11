@@ -55,7 +55,7 @@ In either case, the container will then generate a Configuration.xml with sensib
 
 ## Build your own?
 
-Sure, why not :)  You can find build instructions and Dockerfiles for Debian 9 (this image) as well as Centos 8 Sream versions [in my GitHub repository](https://github.com/sysconfig/corrade-11-docker).
+Sure, why not :)  You can find build instructions and Dockerfiles for Debian 10 (this image) as well as Centos 8 Sream versions [in my GitHub repository](https://github.com/sysconfig/corrade-11-docker).
 
 ## License
 

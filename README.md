@@ -6,17 +6,17 @@ This repository however is licensed under the **0-Clause BSD Licence** (see belo
 
 The intention is to make it easy to deploy Corrade with Docker, hence making it independent from the underlying OS or environment. It will work just fine on Docker for Windows, Linux, locally or with any hosting provider.
 
-Provided are two different docker builds, one with Centos 8 Stream, one with Debian 9 (slim). It's a matter of preference, which one you pick. They do exactly the same. 
+Provided are two different docker builds, one with Centos 8 Stream, one with Debian 10 (slim). It's a matter of preference, which one you pick. They do exactly the same. 
 
 
 ## Pre-built Docker image
 
-The pre-built image with Corrade on Debian 9 can be found [in my Dockerhub repository](https://hub.docker.com/r/sysconfig/corrade-11-docker)
+The pre-built image with Corrade on Debian 10 can be found [in my Dockerhub repository](https://hub.docker.com/r/sysconfig/corrade-11-docker)
 
 ## Dockerfile build
 
 * execute for CentOS build: `docker build -t corrade -f Dockerfile-centos .` 
-* execute for Debian 9 (Slim) build: `docker build -t corrade -f Dockerfile-debian-9-slim .` 
+* execute for Debian 10 (Slim) build: `docker build -t corrade -f Dockerfile-debian-slim .` 
 
 Note, the build will try to pull https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip, which is the latest Corrade version available
 
