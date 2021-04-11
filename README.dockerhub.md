@@ -1,40 +1,21 @@
-# corrade-docker
+# Corrade 11 Docker Container
 
-This repository provides a docker build for [Corrade](https://grimore.org/secondlife/scripted_agents/corrade), a scripted agent (bot) for SL. Note that [Corrade](https://grimore.org/secondlife/scripted_agents/corrade) is free to use but closed-source and proprietary with its [own license](https://grimore.org/licenses/was-pc-od). 
-
-This repository however is licensed under the **0-Clause BSD Licence** (see below) and merely provides a wrapper and means to run Corrade, without altering it.
-
-The intention is to make it easy to deploy Corrade with Docker, hence making it independent from the underlying OS or environment. It will work just fine on Docker for Windows, Linux, locally or with any hosting provider.
-
-Provided are two different docker builds, one with Centos 8 Stream, one with Debian 9 (slim). It's a matter of preference, which one you pick. They do exactly the same. 
-
-
-## Pre-built Docker image
-
-The pre-built image with Corrade on Debian 9 can be found [in my Dockerhub repository](https://hub.docker.com/r/sysconfig/corrade-11-docker)
-
-## Dockerfile build
-
-* execute for CentOS build: `docker build -t corrade -f Dockerfile-centos .` 
-* execute for Debian 9 (Slim) build: `docker build -t corrade -f Dockerfile-debian-9-slim .` 
-
-Note, the build will try to pull https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip, which is the latest Corrade version available
+This docker image provides [Corrade](https://grimore.org/secondlife/scripted_agents/corrade), a scripted agent (bot) for SL. Note that [Corrade](https://grimore.org/secondlife/scripted_agents/corrade) is free to use but closed-source and proprietary with its [own license](https://grimore.org/licenses/was-pc-od). 
 
 
 ## Startup
 
 With the build just created above, run:
 ```
-docker run -d -p54377:54377 --name corrade corrade
+docker run -d -p54377:54377 --name corrade sysconfig/corrade-11-docker:latest
 ```
 
-Then call http://127.0.0.1:54377 in the browser. Password is "nucleus". Configure as required.
+Then call http://127.0.0.1:54377 in the browser (or the respective IP of the server you are running it on). Password is "nucleus". Configure as required.
 
 You can then pull down the saved configuration for future use as follows:
 ```
 docker cp corrade:/corrade/Configuration.xml .
 ```
-
 
 Alternatively, if you have a configuration already, just copy it in:
 ```
@@ -58,22 +39,27 @@ docker run -d -p54377:54377 \
     --env PASSWORD=supersecret \
     --env GROUP="My Group" \
     --env GROUPPW=groupassword \
-    --name corrade corrade
+    --name corrade sysconfig/corrade-11-docker:latest
 ```
 
 If you plan to rebuild the container often, you might instead use this:
 ```
 docker run -d -p54377:54377 \
     --env-file Corrade.properties \
-    --name corrade corrade
+    --name corrade sysconfig/corrade-11-docker:latest
 ```
-You'd have to populate the file `Corrade.properties` accordingly then.
+You'd have to populate the file `Corrade.properties` accordingly then. [An example can be found here.](https://github.com/sysconfig/corrade-11-docker/blob/master/Corrade.properties)
 
 In either case, the container will then generate a Configuration.xml with sensible defaults for the one account and group specified and load this as Corrade starts up. If Configuration.xml already exists, environment variables have no effect, thereby preserving whatever changes have been made manually (through copying in or via Nucleus) later.
 
 
+## Build your own?
+
+Sure, why not :)  You can find build instructions and Dockerfiles for Debian 9 (this image) as well as Centos 8 Sream versions [in my GitHub repository](https://github.com/sysconfig/corrade-11-docker).
+
 ## License
 
+The following license applies to my docker build and (GitHub repository](https://github.com/sysconfig/corrade-11-docker), **NOT** to Corrade itself.
 
 Copyright (C) 2021 by https://github.com/sysconfig
 
