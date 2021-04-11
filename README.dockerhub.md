@@ -59,7 +59,7 @@ Sure, why not :)  You can find build instructions and Dockerfiles for Debian 10 
 
 ## License
 
-The following license applies to my docker build and (GitHub repository](https://github.com/sysconfig/corrade-11-docker), **NOT** to Corrade itself.
+The following license applies to my docker build and [GitHub repository](https://github.com/sysconfig/corrade-11-docker), **NOT** to Corrade itself.
 
 Copyright (C) 2021 by https://github.com/sysconfig
 
