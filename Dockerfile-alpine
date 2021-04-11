@@ -1,0 +1,29 @@
+
+# build file for Corrade docker container
+
+FROM alpine:latest
+LABEL maintainer="ch@sysconfig.org.uk"
+EXPOSE 54377
+
+
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/corrade/dotnet
+ENV DOTNET_ROOT=/corrade/dotnet
+
+WORKDIR /corrade
+
+RUN apk add wget unzip bash icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib libc6-compat gcompat
+RUN wget https://download.visualstudio.microsoft.com/download/pr/21fdb75c-4eb5-476d-a8b8-1d096e4b7b14/c1f853410a58713cf5a56518ceeb87e8/dotnet-sdk-5.0.202-linux-musl-x64.tar.gz
+RUN mkdir -p dotnet && tar zxf dotnet-sdk-5.0.202-linux-musl-x64.tar.gz -C dotnet
+RUN rm -f dotnet-sdk-5.0.202-linux-musl-x64.tar.gz
+
+RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip
+ADD Nucleus.xml ./
+ADD Configuration.xml.template ./
+ADD start-corrade.sh ./
+RUN unzip LATEST.zip
+
+
+
+ENTRYPOINT ["/corrade/start-corrade.sh"]
+#CMD ["/corrade/start-corrade.sh"]
+#ENTRYPOINT ["/bin/sh"]
