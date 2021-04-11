@@ -3,9 +3,9 @@
 This docker image provides [Corrade](https://grimore.org/secondlife/scripted_agents/corrade), a scripted agent (bot) for SL. Note that [Corrade](https://grimore.org/secondlife/scripted_agents/corrade) is free to use but closed-source and proprietary with its [own license](https://grimore.org/licenses/was-pc-od). 
 
 
-## Startup
+## Quick start
 
-With the build just created above, run:
+To launch the container, simply run:
 ```
 docker run -d -p54377:54377 --name corrade sysconfig/corrade-11-docker:latest
 ```
@@ -55,7 +55,7 @@ In either case, the container will then generate a Configuration.xml with sensib
 
 ## Build your own?
 
-Sure, why not :)  You can find build instructions and Dockerfiles for Debian 10 (this image) as well as Centos 8 Sream versions [in my GitHub repository](https://github.com/sysconfig/corrade-11-docker).
+Sure, why not :)  You can find build instructions and Dockerfiles for Debian 10 (this image) as well as Centos 8 Stream versions [in my GitHub repository](https://github.com/sysconfig/corrade-11-docker).
 
 ## License
 
