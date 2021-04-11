@@ -72,6 +72,38 @@ You'd have to populate the file `Corrade.properties` accordingly then.
 In either case, the container will then generate a Configuration.xml with sensible defaults for the one account and group specified and load this as Corrade starts up. If Configuration.xml already exists, environment variables have no effect, thereby preserving whatever changes have been made manually (through copying in or via Nucleus) later.
 
 
+## Corrade as a service (Linux systemd)
+
+Create a file `/etc/systemd/system/corrade-container.service`:
+```
+[Unit]
+Description=Corrade container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=300
+
+ExecStart=/usr/bin/docker start -a corrade
+ExecStop=/usr/bin/docker stop -t 15 corrade
+
+[Install]
+WantedBy=default.target
+```
+
+Then execute:
+```
+systemctl enable corrade-container.service
+systemctl start corrade-container.service
+```
+
+Now corrade will start up at system boot (provided that docker is running too, but this goes beyond this readme). If it fails, it'll automatically restart after five minutes. We have a delay here, because if for example the login fails or our configuration is borked, we do not want to spam the login servers. Adjust at your own risk.
+
+
+
+
+
 ## License
 
 
