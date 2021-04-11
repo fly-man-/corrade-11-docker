@@ -14,6 +14,7 @@ RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/lin
 ADD Nucleus.xml ./
 ADD Configuration.xml.template ./
 ADD start-corrade.sh ./
+RUN chmod 750 start-corrade.sh 
 RUN unzip LATEST.zip
 
 
