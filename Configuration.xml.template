@@ -44,12 +44,10 @@
     </Servers>
     <StartLocations>
         <StartLocation>
-            <Region>Metellus</Region>
-            <Position>
-                <Y>169</Y>
-                <X>24</X>
-                <Z>3803</Z>
-            </Position>
+            <Region>home</Region>
+        </StartLocation>
+        <StartLocation>
+            <Region>last</Region>
         </StartLocation>
     </StartLocations>
     <Groups>
