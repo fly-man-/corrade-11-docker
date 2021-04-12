@@ -14,10 +14,10 @@ RUN apt-get upgrade -y
 
 # pre-requisites (dotnet) need to come from Microsoft on Debian
 
-RUN apt-get install -y wget gpg apt-transport-https busybox
-RUN wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+RUN apt-get install -y wget gpg apt-transport-https busybox unzip
+RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
 RUN mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-RUN wget https://packages.microsoft.com/config/debian/10/prod.list
+RUN wget -q https://packages.microsoft.com/config/debian/10/prod.list
 RUN mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
 RUN apt-get update -y
 RUN apt-get install -y dotnet-runtime-5.0
@@ -28,6 +28,7 @@ ADD Nucleus.xml ./
 ADD Configuration.xml.template ./
 ADD start-corrade.sh ./
 RUN chmod 750 start-corrade.sh 
+RUN chmod 750 Corrade 
 RUN rm -rf /var/cache/apt/*
 
 
