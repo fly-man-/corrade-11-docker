@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+
+    stages {
+        stage('Get CentOS image') {
+            when {
+                expression { params.OS_Version == "centos" }
+            }
+            steps {
+                sh "docker pull centos:latest"
+            }
+        }
+        stage('Get Debian slim image') {
+            when {
+                expression { params.OS_Version == "debian-slim" }
+            }
+            steps {
+                sh "docker pull debian:stable-slim"
+            }
+        }
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/sysconfig/corrade-11-docker.git'
+
+               
+                sh "docker build -t corrade -f Dockerfile-${OS_Version} ."
+
+            }
+
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+
+                    withDockerRegistry([ credentialsId: "docker_hub", url: "" ]) {
+                      sh  "docker image tag corrade:latest sysconfig/corrade-11-docker:${OS_Version}"
+                      sh  "docker push sysconfig/corrade-11-docker:${OS_Version}"
+                      sh  "docker rmi sysconfig/corrade-11-docker:${OS_Version}"
+                    }
+
+                }
+            }
+        }
+        stage('Cleanup') {
+            steps {
+                sh "docker rmi centos:latest"
+                sh "docker rmi debian:stable-slim"
+            }
+        }
+
+    }
+}
