@@ -44,10 +44,10 @@
     </Servers>
     <StartLocations>
         <StartLocation>
-            <Region>home</Region>
+            <Region>last</Region>
         </StartLocation>
         <StartLocation>
-            <Region>last</Region>
+            <Region>home</Region>
         </StartLocation>
     </StartLocations>
     <Groups>
