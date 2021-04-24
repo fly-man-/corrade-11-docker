@@ -10,7 +10,7 @@ pipeline {
                     properties([
                         parameters([
                             choice(
-                                choices: ['centos', 'debian-slim'],
+                                choices: ['debian-slim', 'centos'],
                                 name: 'OS_Version'
                             )
                         ])
