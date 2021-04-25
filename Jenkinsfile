@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'x86' }
 
 
     stages {
@@ -79,4 +79,5 @@ pipeline {
         }
 
     }
+    
 }
