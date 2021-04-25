@@ -23,8 +23,8 @@ RUN mkdir -p dotnet && tar zxf dotnet-sdk-5.0.202-linux-arm64.tar.gz -C dotnet
 RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip -qO - | busybox unzip -
 ADD Nucleus.xml ./
 ADD Configuration.xml.template ./
-ADD start-corrade.sh ./
-RUN chmod 750 start-corrade.sh 
+ADD start-corrade-aarch64.sh ./
+RUN chmod 750 start-corrade-aarch64.sh 
 RUN chmod 750 Corrade 
 RUN rm -rf /var/cache/apt/*
 
