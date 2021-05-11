@@ -82,6 +82,8 @@
                 <Permission>friendship</Permission>
                 <Permission>economy</Permission>
                 <Permission>directory</Permission>
+                <Permission>system</Permission>
+                <Permission>execute</Permission>
             </Permissions>
             <Cookies />
             <CacheMembers>1</CacheMembers>
