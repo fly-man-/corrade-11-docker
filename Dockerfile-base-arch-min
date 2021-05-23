@@ -1,0 +1,40 @@
+FROM alpine:latest as alpine
+
+# Allows us to build any version
+ARG version=2021.05.01
+ARG arch=x86_64
+ARG base=http://mirror.rackspace.com/archlinux/iso/${version}/
+
+# Extract the bootstrap to /
+ADD ${base}archlinux-bootstrap-${version}-${arch}.tar.gz /arch.tar.gz
+# One version of docker is broken and extracts the file
+RUN [ -f /arch.tar.gz ] && tar xf /arch.tar.gz || mv /arch.tar.gz/root.x86_64 /root.x86_64
+
+# Default to rackspace global mirror
+RUN echo 'Server = http://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /root.x86_64/etc/pacman.d/mirrorlist
+
+# Then from there we want to pacstrap only a small set of packages to make the image as small as possible
+FROM scratch as bigarch
+
+ARG pkglist="archlinux-keyring bash coreutils filesystem pacman pacman-mirrorlist"
+
+COPY --from=alpine /root.x86_64 /
+RUN rm README
+RUN pacman-key --init && pacman-key --populate archlinux && pacman -Sy --noconfirm --noprogressbar binutils
+# Installing GnuPG requires /dev/null to be available in the bootstrapped env
+# Also to save some extra space we strip usr/lib and remove man/doc pages
+RUN mkdir /strap/var/lib/pacman -p \
+    && mkdir {/tmp/cache,/strap/dev} \
+    && mknod /strap/dev/null c 1 3 \
+    && pacman -Sy -r /strap/ --cachedir /tmp/cache/ --noconfirm --noprogressbar ${pkglist} \
+    && strip /strap/usr/lib/*.so.* \
+    && rm -Rf /strap/usr/share/{man,doc}/* \
+    && echo 'Server = http://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /strap/etc/pacman.d/mirrorlist
+
+# Final image, just copy what was installed in strap, then init the keyring
+FROM scratch
+
+COPY --from=bigarch /strap /
+RUN pacman-key --init && pacman-key --populate archlinux
+
+CMD [ "/usr/bin/bash" ]
