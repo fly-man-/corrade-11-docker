@@ -1,7 +1,7 @@
 
 # build file for Corrade docker container
 
-FROM centos:latest
+FROM centos:centos7
 LABEL maintainer="ch@sysconfig.org.uk"
 EXPOSE 54377
 
