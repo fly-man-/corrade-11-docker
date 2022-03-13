@@ -18,6 +18,8 @@ test -f Configuration.xml && {
     sed -i "s/##GROUP##/$GROUP/" Configuration.xml.template
     sed -i "s/##GROUPPW##/$GROUPPW/" Configuration.xml.template
     mv Configuration.xml.template Configuration.xml
+    # change to config file name in 11.0.236.303
+    cp Configuration.xml CorradeConfiguration.xml
 }
 
 
