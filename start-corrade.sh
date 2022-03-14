@@ -20,6 +20,7 @@ test -f Configuration.xml && {
     mv Configuration.xml.template Configuration.xml
     # change to config file name in 11.0.236.303
     cp Configuration.xml CorradeConfiguration.xml
+    cp Nucleus.xml NucleusConfiguration.xml
 }
 
 
