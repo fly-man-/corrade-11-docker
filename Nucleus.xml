@@ -2,8 +2,8 @@
 <!DOCTYPE Configuration [
 <!ATTLIST Configuration xmlns:xsi CDATA #IMPLIED xsi:noNamespaceSchemaLocation CDATA #IMPLIED>
 ]>
-<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:corrade-nucleus-schema">
+<NucleusConfiguration xmlns="urn:corrade-nucleus-schema">
     <Prefix>http://+:54377/</Prefix>
     <Enabled>1</Enabled>
     <CodeWord>nucleus</CodeWord>
-</Configuration>
+</NucleusConfiguration>

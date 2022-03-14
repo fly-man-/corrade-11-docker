@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Configuration [<!ATTLIST Configuration xmlns:xsi CDATA #IMPLIED xsi:noNamespaceSchemaLocation CDATA #IMPLIED>]>
-<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:corrade-configuration-schema">
+<CorradeConfiguration xmlns="urn:corrade-configuration-schema">
     <FirstName>##FIRSTNAME##</FirstName>
     <LastName>##LASTNAME##</LastName>
     <Password>$1$##PASSWORD##</Password>
@@ -130,4 +130,4 @@
         </Terse>
     </NotificationSettings>
     <ScriptLanguage>WAS</ScriptLanguage>
-</Configuration>
+</CorradeConfiguration>
