@@ -23,7 +23,7 @@ RUN apt-get update -y
 RUN apt-get install -y dotnet-runtime-5.0
 
 
-RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/Corrade-11.0.270.348-linux-x64.zip -qO - | busybox unzip -
+RUN wget --no-check-certificate https://corrade.grimore.org/download/corrade/linux-x64/LATEST.zip -qO - | busybox unzip -
 ADD Nucleus.xml ./
 ADD Configuration.xml.template ./
 ADD start-corrade.sh ./
