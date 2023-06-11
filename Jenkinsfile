@@ -43,7 +43,7 @@ pipeline {
                 git 'https://github.com/sysconfig/corrade-11-docker.git'
 
                
-                sh "docker build -t corrade -f Dockerfile-${OS_Version} ."
+                sh "docker build --no-cache -t corrade -f Dockerfile-${OS_Version} ."
 
             }
 
