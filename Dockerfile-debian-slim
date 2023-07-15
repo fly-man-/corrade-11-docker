@@ -15,7 +15,7 @@ RUN apt-get upgrade -y
 
 # pre-requisites (dotnet) need to come from Microsoft on Debian
 
-RUN apt-get install -y wget gpg apt-transport-https busybox unzip procps perl-modules libterm-readline-gnu-perl || true
+RUN apt-get install -y wget gpg apt-transport-https busybox unzip procps perl-modules libterm-readline-gnu-perl libgssapi-krb5 || true
 RUN dpkg-reconfigure -f noninteractive debconf
 RUN wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
 RUN mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
