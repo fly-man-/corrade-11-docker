@@ -52,7 +52,7 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
 
-                    withDockerRegistry([ credentialsId: "docker_hub", url: "" ]) {
+                    withDockerRegistry([ credentialsId: "docker_hub_2024", url: "" ]) {
                       sh  "docker image tag corrade:latest sysconfig/corrade-11-docker:${OS_Version}"
                       sh  "docker push sysconfig/corrade-11-docker:${OS_Version}"
                       sh  "docker rmi sysconfig/corrade-11-docker:${OS_Version}"
