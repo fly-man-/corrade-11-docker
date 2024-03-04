@@ -1,6 +1,9 @@
 pipeline {
     agent { label 'x86' }
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker_hub_2024')
+    }
 
     stages {
 
@@ -20,7 +23,6 @@ pipeline {
         }
 
 
-
         stage('Get CentOS image') {
             when {
                 expression { params.OS_Version == "centos" }
@@ -37,6 +39,14 @@ pipeline {
                 sh "docker pull debian:stable-slim"
             }
         }
+        
+        stage('Login to Docker Hub') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
@@ -52,11 +62,9 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
 
-                    withDockerRegistry([ credentialsId: "docker_hub_2024", url: "" ]) {
-                      sh  "docker image tag corrade:latest sysconfig/corrade-11-docker:${OS_Version}"
-                      sh  "docker push sysconfig/corrade-11-docker:${OS_Version}"
-                      sh  "docker rmi sysconfig/corrade-11-docker:${OS_Version}"
-                    }
+                    sh  "docker image tag corrade:latest sysconfig/corrade-11-docker:${OS_Version}"
+                    sh  "docker push sysconfig/corrade-11-docker:${OS_Version}"
+                    sh  "docker rmi sysconfig/corrade-11-docker:${OS_Version}"
 
                 }
             }
