@@ -4,7 +4,7 @@
     <FirstName>##FIRSTNAME##</FirstName>
     <LastName>##LASTNAME##</LastName>
     <Password>$1$##PASSWORD##</Password>
-    <LoginURI>https://login.agni.lindenlab.com/cgi-bin/login.cgi</LoginURI>
+    <LoginURI>##GRIDURL##</LoginURI>
     <Servers>
         <HTTPServer>
             <Enable>0</Enable>
